@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using Boot.Codes.Handlers;
+using Impostor.Api.Events.Managers;
 using Impostor.Api.Plugins;
 using Microsoft.Extensions.Logging;
 
@@ -11,10 +13,11 @@ namespace Boot.Codes
 
         private readonly IGameCodeManager _manager;
 
-        public BootCodesPlugin(ILogger<BootCodesPlugin> logger, IGameCodeManager manager)
+        public BootCodesPlugin(ILogger<BootCodesPlugin> logger, IGameCodeManager manager, IEventManager eventManager, GameEventListener eventListener)
         {
             this._logger = logger;
             this._manager = manager;
+            eventManager.RegisterListener(eventListener);
         }
 
         public override ValueTask EnableAsync()

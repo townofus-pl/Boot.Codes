@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!--ProjectReference Include="../Impostor/src/Impostor.Api/Impostor.Api.csproj" /-->
-    <PackageReference Include="Impostor.Api" Version="1.9.1" />
+    <!--TODO switch back to mainline if Impostor 1.9.2 is released -->
+    <ProjectReference Include="../Impostor/src/Impostor.Api/Impostor.Api.csproj" />
+    <!--PackageReference Include="Impostor.Api" Version="1.9.1" /-->
     <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
   </ItemGroup>
 

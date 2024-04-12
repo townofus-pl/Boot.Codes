@@ -1,6 +1,7 @@
 using Impostor.Api.Plugins;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Boot.Codes.Handlers;
 
 namespace Boot.Codes
 {
@@ -11,6 +12,7 @@ namespace Boot.Codes
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IGameCodeManager, GameCodeManager>();
+            services.AddSingleton<GameEventListener>();
         }
     }
 }
