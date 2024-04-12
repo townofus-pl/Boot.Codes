@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Security.Cryptography;
 
 namespace Boot.Codes
 {
@@ -13,7 +14,7 @@ namespace Boot.Codes
             var size = list.Count;
             for (var i = 0; i < size - 2; i++)
             {
-                var j = StrongRandom.Next(i, size);
+                var j = RandomNumberGenerator.GetInt32(i, size);
                 var value = list[i];
                 list[i] = list[j];
                 list[j] = value;

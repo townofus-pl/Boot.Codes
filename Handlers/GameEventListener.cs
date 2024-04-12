@@ -11,6 +11,8 @@ namespace Boot.Codes.Handlers
             this._gameCodeManager = gameCodeManager;
         }
 
+        // NOTE: if you want to override the results of Boot.Codes, register an event at a lower priority
+
         [EventListener(EventPriority.Highest)]
         public void OnGameCreated(IGameCreationEvent e) => e.GameCode = _gameCodeManager.Get();
 

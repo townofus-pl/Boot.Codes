@@ -6,6 +6,7 @@ using Boot.Codes.Handlers;
 using System.Collections.Generic;
 using Impostor.Api.Events.Managers;
 using Microsoft.Extensions.Logging;
+using System.Security.Cryptography;
 
 namespace Boot.Codes
 {
@@ -114,7 +115,7 @@ namespace Boot.Codes
                     return _codeFactory.Create();
                 }
 
-                var index = StrongRandom.Next(0, _codes.Count);
+                var index = RandomNumberGenerator.GetInt32(0, _codes.Count);
                 var code = _codes[index];
 
                 _codes.RemoveAt(index);

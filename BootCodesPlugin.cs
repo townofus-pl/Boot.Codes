@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Boot.Codes
 {
-    [ImpostorPlugin("at.duikbo.codes", "BootCodes", "miniduikboot", "0.1")]
+    [ImpostorPlugin("at.duikbo.codes")]
     public class BootCodesPlugin : PluginBase
     {
         private readonly ILogger<BootCodesPlugin> _logger;
