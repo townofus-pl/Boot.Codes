@@ -6,8 +6,6 @@ namespace Boot.Codes
     {
         int SixCharCodes { get; }
 
-        int FourCharCodes { get; }
-
         string Path { get; }
 
         GameCode Get();

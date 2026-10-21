@@ -6,3 +6,8 @@
 /bin
 /obj
 *.user
+
+# Build output in subfolders (the tests)
+**/bin/
+**/obj/
+.DS_Store

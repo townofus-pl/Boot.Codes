@@ -19,10 +19,9 @@ namespace Boot.Codes
 
         public override ValueTask EnableAsync()
         {
-            var sum = _manager.FourCharCodes + _manager.SixCharCodes;
             _logger.LogInformation(
-                "Boot.Codes: loaded {FourCharCodes} 4-char codes and {SixCharCodes} 6-char codes [{Total} total] from {Path}!",
-                _manager.FourCharCodes, _manager.SixCharCodes, sum, _manager.Path);
+                "Boot.Codes: loaded {SixCharCodes} 6-char codes from {Path}!",
+                _manager.SixCharCodes, _manager.Path);
             return default;
         }
     }

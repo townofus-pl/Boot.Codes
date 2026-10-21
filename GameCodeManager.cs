@@ -12,8 +12,6 @@ namespace Boot.Codes
 {
     public class GameCodeManager : IGameCodeManager
     {
-        private static readonly HashSet<char> V2Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToHashSet();
-
         private readonly List<GameCode> _codes;
 
         private readonly HashSet<GameCode> _inUse;
@@ -28,8 +26,6 @@ namespace Boot.Codes
 
         public int SixCharCodes { get; }
 
-        public int FourCharCodes { get; }
-
         public GameCodeManager(ILogger<GameCodeManager> logger, IGameCodeFactory codeFactory, IEventManager eventManager)
         {
             this._logger = logger;
@@ -41,8 +37,7 @@ namespace Boot.Codes
 
             validCodes.Shuffle();
 
-            this.FourCharCodes = validCodes.Count(code => code.Code.Length == 4);
-            this.SixCharCodes = validCodes.Count(code => code.Code.Length == 6);
+            this.SixCharCodes = validCodes.Count;
 
             this._codes = validCodes;
             this._inUse = new HashSet<GameCode>();
@@ -60,10 +55,7 @@ namespace Boot.Codes
                 goto fail;
             }
 
-            var comment = new[] { "--" };
             var codes = new HashSet<GameCode>();
-
-            const StringSplitOptions splitOptions = StringSplitOptions.None;
 
             var startTime = DateTime.Now;
             var invalid = 0;
@@ -74,12 +66,10 @@ namespace Boot.Codes
 
                 foreach (var line in File.ReadLines(file.FullName))
                 {
-                    if(string.IsNullOrWhiteSpace(line)) continue;
-                    var trimStart = line.TrimStart();
-                    if(trimStart.StartsWith(comment[0])) continue;
-                    var codeStr = trimStart.Split(comment, 2, splitOptions)[0].TrimEnd();
+                    var valid = CodeParser.TryParse(line, out var codeStr);
+                    if (valid == null) continue;
 
-                    if (codeStr.Length != 6 && codeStr.Length != 4 || codeStr.Any(c=>!V2Chars.Contains(c)))
+                    if (valid == false)
                     {
                         if (invalid++ < 5) _logger.LogWarning("Boot.Codes: The code \"{code}\" is invalid!", codeStr);
                         if (invalid == 6) _logger.LogWarning("Boot.Codes: Found more invalid codes, please check your input files and clean them up");
